@@ -32,7 +32,9 @@ import {
     const fetchSearch = async () => {
       try {
         const { data } = await axios.get(
-          `https://api.themoviedb.org/3/search/${type ? "tv" : "movie"}?api_key=0bab13500ff0c68f0c6db91a5753d954&language=en-ES&query=${searchText}&page=${page}1&include_adult=false`
+          `https://api.themoviedb.org/3/search/${type ? "tv" : "movie"}?api_key=${
+            process.env.REACT_APP_API_KEY
+          }&language=en-US&query=${searchText}&page=${page}&include_adult=false`
         );
         setContent(data.results);
         setNumOfPages(data.total_pages);
@@ -83,16 +85,17 @@ import {
           </Tabs>
         </ThemeProvider>
         <div className="trending">
-             {content && content.map((e) => (
-                 <SingleContent 
-                 key={e.id}
-                 id={e.id}
-                 poster={e.poster_path}
-                 title={e.title || e.nam}
-                 date={e.first_air_date || e.release_date}
-                 media_type={type ? "tv" : "movie"}
-                 vote_average={e.vote_average}
-                 />
+          {content &&
+            content.map((c) => (
+              <SingleContent
+                key={c.id}
+                id={c.id}
+                poster={c.poster_path}
+                title={c.title || c.name}
+                date={c.first_air_date || c.release_date}
+                media_type={type ? "tv" : "movie"}
+                vote_average={c.vote_average}
+              />
             ))}
           {searchText &&
             !content &&

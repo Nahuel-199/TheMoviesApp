@@ -8,58 +8,58 @@ import useGenre from "../../hooks/useGenre";
 
 
 const Movies = () => {
-  const [page, setPage] = useState(1);
-  const [content, setContent] = useState([]);
-  const [numOfPages, setNumOfPages] = useState();
-  const [selectedGenres, setSelectedGenres] = useState([]);
-  const [genres, setGenres] = useState([]);
-  const genreforURL = useGenre(selectedGenres);//Nuestro propio Hooks
-
-
-
+    const [genres, setGenres] = useState([]);
+    const [selectedGenres, setSelectedGenres] = useState([]);
+    const [page, setPage] = useState(1);
+    const [content, setContent] = useState([]);
+    const [numOfPages, setNumOfPages] = useState();
+    const genreforURL = useGenre(selectedGenres);
+    // console.log(selectedGenres);
+  
     const fetchMovies = async () => {
-        const { data } = await axios.get(
-            `https://api.themoviedb.org/3/discover/movie?api_key=0bab13500ff0c68f0c6db91a5753d954&language=en-ES&sort_by=popularity.desc&include_adult=false&include_video=false&page=${page}&with_genres=${genreforURL}`
-        );
-
-        setContent(data.results)
-        setNumOfPages(data.total_pages);
+      const { data } = await axios.get(
+        `https://api.themoviedb.org/3/discover/movie?api_key=${process.env.REACT_APP_API_KEY}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=${page}&with_genres=${genreforURL}`
+      );
+      setContent(data.results);
+      setNumOfPages(data.total_pages);
     };
-
+  
     useEffect(() => {
-        window.scroll(0, 0);
+      window.scroll(0, 0);
       fetchMovies();
       // eslint-disable-next-line
-    }, [page, genreforURL]);
+    }, [genreforURL, page]);
+  
     return (
-        <div>
-            <span className="pageTitle">Movies</span>
-            <Genres 
-            type="movie" 
-            selectedGenres={selectedGenres} 
-            setSelectedGenres={setSelectedGenres} 
-            genres={genres} 
-            setGenres={setGenres}
-            setPage={setPage}
-            /> 
-            <div className="trending">
-             {content && content.map((e) => (
-                 <SingleContent 
-                 key={e.id}
-                 id={e.id}
-                 poster={e.poster_path}
-                 title={e.title || e.nam}
-                 date={e.first_air_date || e.release_date}
-                 media_type="movie"
-                 vote_average={e.vote_average}
-                 />
-             ))}
+      <div>
+        <span className="pageTitle">Discover Movies</span>
+        <Genres
+          type="movie"
+          selectedGenres={selectedGenres}
+          setSelectedGenres={setSelectedGenres}
+          genres={genres}
+          setGenres={setGenres}
+          setPage={setPage}
+        />
+        <div className="trending">
+          {content &&
+            content.map((c) => (
+              <SingleContent
+                key={c.id}
+                id={c.id}
+                poster={c.poster_path}
+                title={c.title || c.name}
+                date={c.first_air_date || c.release_date}
+                media_type="movie"
+                vote_average={c.vote_average}
+              />
+            ))}
         </div>
         {numOfPages > 1 && (
-        <CustomPagination setPage={setPage} numOfPages={numOfPages}/>
+          <CustomPagination setPage={setPage} numOfPages={numOfPages} />
         )}
-        </div>
+      </div>
     );
-};
-
-export default Movies
+  };
+  
+  export default Movies;
