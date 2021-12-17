@@ -1,5 +1,9 @@
 ![The Movies-App ](https://firebasestorage.googleapis.com/v0/b/react-eccomerce-979a7.appspot.com/o/Categorias%2FAppdeSeries.jpg?alt=media&token=68634bdf-e2a3-487b-86d4-19b3853b6566)
 
+![The Movies-App ](https://firebasestorage.googleapis.com/v0/b/react-eccomerce-979a7.appspot.com/o/Categorias%2FAppdeSeries3.jpg?alt=media&token=7553b530-b9c9-4fe2-a55c-befbed9200a2)
+
+![The Movies-App ](https://firebasestorage.googleapis.com/v0/b/react-eccomerce-979a7.appspot.com/o/Categorias%2FAppdeSeries4.jpg?alt=media&token=4e755e43-0ae5-4dcf-80fd-1298768b638f)
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
